@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = '/login';
@@ -12,11 +13,40 @@ class _LoginScreenState extends State<LoginScreen> {
   String _email = '';
   String _password = '';
   bool _isObscure = true;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<void> _login() async {
+    if (_formKey.currentState?.validate() == true) {
+      _formKey.currentState?.save();
+      try {
+        UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+          email: _email,
+          password: _password,
+        );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Iniciando sesión...')),
+        );
+        // Navigate to the main screen
+        Navigator.pushNamed(context, '/main');
+      } on FirebaseAuthException catch (e) {
+        String message;
+        if (e.code == 'user-not-found') {
+          message = 'No hay ningún usuario registrado con ese correo.';
+        } else if (e.code == 'wrong-password') {
+          message = 'Contraseña incorrecta.';
+        } else {
+          message = 'Error: ${e.message}';
+        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(message)),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -123,23 +153,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         SizedBox(height: 30),
                         ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState?.validate() == true) {
-                              _formKey.currentState?.save();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Iniciando sesión...')),
-                              );
-                            }
-                          },
+                          onPressed: _login,
                           style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.blue[900], backgroundColor: Colors.white,
+                            foregroundColor: Colors.blue[900],
+                            backgroundColor: Colors.white,
                             padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30),
                             ),
                           ),
                           child: Text(
-                            'Iniciar Sesión',
+                            'Iniciar sesión',
                             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),

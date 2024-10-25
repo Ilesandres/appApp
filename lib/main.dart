@@ -1,6 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mi_primer_proyecto/firebase_options.dart';
 
-// Importa las pantallas que ya has creado
+
 import 'welcome_screen.dart';
 import 'login_screen.dart';
 import 'register_screen.dart';
@@ -9,7 +12,11 @@ import 'abc.dart';
 import 'chat.dart';
 import 'profile.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(LenguasVivasApp());
 }
 
@@ -22,16 +29,38 @@ class LenguasVivasApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      // Ruta inicial: puede ser la de bienvenida o login
-      initialRoute: WelcomeScreen.routeName, // Cambiar a '/login' si es necesario
+      home: AuthMiddleware(), 
       routes: {
         WelcomeScreen.routeName: (context) => WelcomeScreen(),
         '/login': (context) => LoginScreen(),
         '/register': (context) => RegisterScreen(),
-        '/abc':(context)=> Abc(),
-        '/chat':(context)=>Chat(),
-        '/profile':(context)=>Profile(),
-        MainScreen.routeName: (context) => MainScreen(), // Añadir la pantalla principal
+        '/abc': (context) => Abc(),
+        '/chat': (context) => Chat(),
+        '/home': (context) => WelcomeScreen(),
+        '/profile': (context) => Profile(),
+        MainScreen.routeName: (context) => MainScreen(), 
+      },
+    );
+  }
+}
+
+class AuthMiddleware extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
+        if (!snapshot.hasData) {
+          return WelcomeScreen(); 
+        }
+        
+        return MainScreen();
       },
     );
   }

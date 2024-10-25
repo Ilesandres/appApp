@@ -1,8 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'navigation_buttons.dart';
 
 class Profile extends StatelessWidget {
   static const String routeName = '/profile';
+  Future<void> logout() async {
+    try{
+      await FirebaseAuth.instance.signOut();
+    }catch(e){
+      print(e);
+    };
+}
 
     @override
   Widget build(BuildContext context) {
@@ -63,8 +72,8 @@ class Profile extends StatelessWidget {
                   _buildProfileButton(
                     icon: Icons.logout,
                     title: 'Cerrar sesión',
-                    onTap: () {
-                      // Implementar lógica de cierre de sesión
+                    onTap: () async {
+                      await logout();
                       Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
                     },
                   ),
@@ -92,5 +101,7 @@ class Profile extends StatelessWidget {
     );
   }
 }
+
+
 
 

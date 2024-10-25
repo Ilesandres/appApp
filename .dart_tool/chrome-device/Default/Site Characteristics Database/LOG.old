@@ -1,4 +1,13 @@
-2024/10/20-16:41:37.873 1f20 Reusing MANIFEST C:\Users\PERSONAL\AppData\Local\Temp\flutter_tools.34cff9b6\flutter_tools_chrome_device.b401b541\Default\Site Characteristics Database/MANIFEST-000001
-2024/10/20-16:41:37.874 1f20 Recovering log #6
-2024/10/20-16:41:37.875 1f20 Reusing old log C:\Users\PERSONAL\AppData\Local\Temp\flutter_tools.34cff9b6\flutter_tools_chrome_device.b401b541\Default\Site Characteristics Database/000006.log 
-2024/10/20-16:41:37.876 1f20 Delete type=0 #3
+2024/10/24-15:56:56.417 2ba8 Reusing MANIFEST C:\Users\EMERSO~1\AppData\Local\Temp\flutter_tools.722bf53b\flutter_tools_chrome_device.d0a6da00\Default\Site Characteristics Database/MANIFEST-000001
+2024/10/24-15:56:56.422 2ba8 Recovering log #3
+2024/10/24-15:56:56.422 2ba8 Level-0 table #13: started
+2024/10/24-15:56:56.428 2ba8 Level-0 table #13: 331 bytes OK
+2024/10/24-15:56:56.429 2ba8 Recovering log #6
+2024/10/24-15:56:56.429 2ba8 Level-0 table #14: started
+2024/10/24-15:56:56.433 2ba8 Level-0 table #14: 539 bytes OK
+2024/10/24-15:56:56.433 2ba8 Recovering log #10
+2024/10/24-15:56:56.434 2ba8 Reusing old log C:\Users\EMERSO~1\AppData\Local\Temp\flutter_tools.722bf53b\flutter_tools_chrome_device.d0a6da00\Default\Site Characteristics Database/000010.log 
+2024/10/24-15:56:56.437 2ba8 Delete type=0 #3
+2024/10/24-15:56:56.437 2ba8 Delete type=2 #4
+2024/10/24-15:56:56.438 2ba8 Delete type=2 #6
+2024/10/24-15:56:56.438 2ba8 Delete type=0 #6

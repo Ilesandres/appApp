@@ -9,8 +9,11 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
+  // ignore: unused_field
   String _name = '';
+  // ignore: unused_field
   String _email = '';
+  // ignore: unused_field
   String _password = '';
   bool _isObscure = true;
 

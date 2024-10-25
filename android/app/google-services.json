@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "380695800660",
+    "project_id": "raices-a8bcf",
+    "storage_bucket": "raices-a8bcf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:380695800660:android:fc6ce9e014edeec8c3f6c1",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdtMP6OyCtlCjnd42o0YPJxjPiRHHguA0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
