@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const String routeName = '/register';
@@ -152,26 +154,48 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         SizedBox(height: 30),
                         ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState?.validate() == true) {
-                              _formKey.currentState?.save();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Registro Exitoso')),
-                              );
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.blue[900], backgroundColor: Colors.white,
-                            padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          child: Text(
-                            'Registrarse',
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                        ),
+  onPressed: () async {
+    if (_formKey.currentState?.validate() == true) {
+      _formKey.currentState?.save();
+      try {
+        // Crear usuario en Firebase Auth
+        UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _email,
+          password: _password,
+        );
+
+        // Aquí puedes agregar el nombre de usuario a Firestore si lo deseas
+       await FirebaseFirestore.instance.collection('users').doc(userCredential.user?.uid).set({
+  'name': _name,
+  'email': _email,
+  'createdAt': FieldValue.serverTimestamp(),
+});
+
+
+        // Mensaje de éxito
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Registro Exitoso')));
+        // Navegar a otra pantalla si es necesario (por ejemplo, la pantalla principal)
+        Navigator.pushNamed(context, '/main');
+      } catch (e) {
+        // Manejo de errores
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error al registrarse: $e')));
+      }
+    }
+  },
+  style: ElevatedButton.styleFrom(
+    foregroundColor: Colors.blue[900],
+    backgroundColor: Colors.white,
+    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(30),
+    ),
+  ),
+  child: Text(
+    'Registrarse',
+    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+  ),
+),
+
                         SizedBox(height: 20),
                         TextButton(
                           onPressed: () {

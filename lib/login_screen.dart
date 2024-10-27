@@ -153,20 +153,32 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         SizedBox(height: 30),
                         ElevatedButton(
-                          onPressed: _login,
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.blue[900],
-                            backgroundColor: Colors.white,
-                            padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          child: Text(
-                            'Iniciar sesión',
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                        ),
+  onPressed: () async {
+    if (_formKey.currentState?.validate() == true) {
+      _formKey.currentState?.save();
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _email,
+          password: _password,
+        );
+        Navigator.pushNamed(context, '/main'); // Navega a la pantalla principal
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error al iniciar sesión: $e')));
+      }
+    }
+  },
+  style: ElevatedButton.styleFrom(
+    foregroundColor: Colors.blue[900], backgroundColor: Colors.white,
+    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(30),
+    ),
+  ),
+  child: Text(
+    'Iniciar Sesión',
+    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+  ),
+),
                         SizedBox(height: 20),
                         TextButton(
                           onPressed: () {

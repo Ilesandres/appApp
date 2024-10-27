@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mi_primer_proyecto/firebase_options.dart';
+import 'package:mi_primer_proyecto/profileScreen.dart';
 
 
 import 'welcome_screen.dart';
@@ -11,6 +12,7 @@ import 'main_screen.dart';
 import 'abc.dart';
 import 'chat.dart';
 import 'profile.dart';
+import 'profileScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,15 +33,17 @@ class LenguasVivasApp extends StatelessWidget {
       ),
       home: AuthMiddleware(), 
       routes: {
-        WelcomeScreen.routeName: (context) => WelcomeScreen(),
-        '/login': (context) => LoginScreen(),
-        '/register': (context) => RegisterScreen(),
-        '/abc': (context) => Abc(),
-        '/chat': (context) => Chat(),
-        '/home': (context) => WelcomeScreen(),
-        '/profile': (context) => Profile(),
-        MainScreen.routeName: (context) => MainScreen(), 
-      },
+  WelcomeScreen.routeName: (context) => WelcomeScreen(),
+  '/login': (context) => LoginScreen(),
+  '/register': (context) => RegisterScreen(),
+  '/abc': (context) => Abc(),
+  '/chat': (context) => Chat(),
+  '/home': (context) => WelcomeScreen(),
+  '/profile': (context) => Profile(),
+  ProfileScreen.routeName: (context) => ProfileScreen(), // Ruta para ProfileScreen
+  MainScreen.routeName: (context) => MainScreen(), 
+},
+
     );
   }
 }
