@@ -1,4 +1,7 @@
-2024/09/27-15:40:56.924 3b50 Reusing MANIFEST C:\Users\EMERSO~1\AppData\Local\Temp\flutter_tools.6820150c\flutter_tools_chrome_device.abc4d5a0\Default\shared_proto_db/MANIFEST-000001
-2024/09/27-15:40:56.925 3b50 Recovering log #4
-2024/09/27-15:40:56.926 3b50 Reusing old log C:\Users\EMERSO~1\AppData\Local\Temp\flutter_tools.6820150c\flutter_tools_chrome_device.abc4d5a0\Default\shared_proto_db/000004.log 
-2024/09/27-15:40:56.927 3b50 Delete type=0 #3
+2024/10/29-20:21:46.874 4d7f Reusing MANIFEST /tmp/flutter_tools.HWBGSO/flutter_tools_chrome_device.DAAZOL/Default/shared_proto_db/MANIFEST-000001
+2024/10/29-20:21:46.874 4d7f Recovering log #4
+2024/10/29-20:21:46.876 4d7f Reusing old log /tmp/flutter_tools.HWBGSO/flutter_tools_chrome_device.DAAZOL/Default/shared_proto_db/000004.log 
+2024/10/29-20:21:46.877 4d7f Delete type=0 #3
+2024/10/29-20:22:00.311 4d7f Level-0 table #8: started
+2024/10/29-20:22:00.315 4d7f Level-0 table #8: 135947 bytes OK
+2024/10/29-20:22:00.319 4d7f Delete type=0 #4

@@ -29,7 +29,7 @@ class MainScreen extends StatelessWidget {
             ),
             SizedBox(width: 10),
             Text(
-              'RAICES',
+              'PUANGUI',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,

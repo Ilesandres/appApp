@@ -1,7 +1,7 @@
 # This is a generated file; do not edit or check into version control.
-cloud_firestore=C:\\Users\\emerson iles\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\cloud_firestore-4.17.5\\
-cloud_firestore_web=C:\\Users\\emerson iles\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\cloud_firestore_web-3.12.5\\
-firebase_auth=C:\\Users\\emerson iles\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_auth-4.20.0\\
-firebase_auth_web=C:\\Users\\emerson iles\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_auth_web-5.12.0\\
-firebase_core=C:\\Users\\emerson iles\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_core-2.32.0\\
-firebase_core_web=C:\\Users\\emerson iles\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_core_web-2.17.5\\
+cloud_firestore=/home/juankpastuzan/.pub-cache/hosted/pub.dev/cloud_firestore-4.17.5/
+cloud_firestore_web=/home/juankpastuzan/.pub-cache/hosted/pub.dev/cloud_firestore_web-3.12.5/
+firebase_auth=/home/juankpastuzan/.pub-cache/hosted/pub.dev/firebase_auth-4.20.0/
+firebase_auth_web=/home/juankpastuzan/.pub-cache/hosted/pub.dev/firebase_auth_web-5.12.0/
+firebase_core=/home/juankpastuzan/.pub-cache/hosted/pub.dev/firebase_core-2.32.0/
+firebase_core_web=/home/juankpastuzan/.pub-cache/hosted/pub.dev/firebase_core_web-2.17.5/

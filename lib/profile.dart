@@ -49,7 +49,7 @@ class Profile extends StatelessWidget {
                     ),
                     SizedBox(height: 20),
                     Text(
-                      'nenfar',
+                      'user',
                       style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
                     ),
                     SizedBox(height: 20),
