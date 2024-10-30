@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'navigation_buttons.dart';
+import '../navigation_buttons.dart';
 
 class MainScreen extends StatelessWidget {
   static const String routeName = '/main';

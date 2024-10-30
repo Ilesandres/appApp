@@ -1,15 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+import '../models/language.dart';
 
+class FirebaseService {
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-FirebaseFirestore db=FirebaseFirestore.instance;
-
-Future<List> getPeople() async{
-List people =[];
-CollectionReference collectionReferencePeople= db.collection('people');
-QuerySnapshot QuerryPeople= await collectionReferencePeople.get();
-QuerryPeople.docs.forEach((documento){ 
-people.add (documento.data());
-});
-return people;
+  Future<List<Language>> getLanguages() async {
+    QuerySnapshot snapshot = await _db.collection('languages').get();
+    return snapshot.docs.map((doc) {
+      return Language(
+        id: doc.id,
+        name: doc['name'],
+        description: doc['description'],
+        audioUrl: doc['audioUrl'],
+        imageUrl: doc['imageUrl'],
+      );
+    }).toList();
+  }
 }
