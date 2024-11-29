@@ -1,0 +1,33 @@
+flutter_application_branch_nenfar/
+│
+├── android/                   # Código nativo de Android (Java/Kotlin)
+├── ios/                       # Código nativo de iOS (Swift/Objective-C)
+├── lib/                       # Código principal del proyecto en Dart
+│   ├──imagenes
+│   │   └──logo.png
+│   ├──services
+│   │   └──api_service.dart
+│   ├──abc.dart
+│   ├──chat.dart
+│   ├──login_sreen.dart
+│   ├──main.dart
+│   ├──main_screen.dart
+│   ├──navigation_buttons.dart
+│   ├──profile.dart
+│   ├── src/                   # Organización del código fuente
+│   │   ├── models/            # Modelos de datos
+│   │   ├── views/             # Vistas (UI)
+│   │   ├── controllers/       # Lógica y controladores (opcional)
+│   │   ├── services/          # Servicios (API, DB, etc.)
+│   │   ├── widgets/           # Widgets reutilizables
+│   │   ├── utils/             # Utilidades y funciones auxiliares
+│   │   └── themes/            # Estilos y configuraciones visuales
+│   └── routes.dart            # Configuración de rutas y navegación
+│
+├── test/                      # Pruebas unitarias y de integración
+│
+├── pubspec.yaml               # Archivo de configuración del proyecto y dependencias
+├── pubspec.lock               # Registro de versiones específicas instaladas
+├── .gitignore                 # Archivos/carpetas a ignorar por Git
+├── README.md                  # Documentación del proyecto
+└── analysis_options.yaml      # Configuración para análisis estático de código
