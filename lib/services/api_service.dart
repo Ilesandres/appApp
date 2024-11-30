@@ -28,6 +28,27 @@ class ApiService {
     }
   }
 
+  // Método para manejar el login
+  Future<bool> login(String email, String password) async {
+    try {
+      // Llamada al método genérico `postRequest`
+      final response = await postRequest('login', {
+        'email': email,
+        'password': password,
+      });
+
+      // Verificar la respuesta del backend
+      if (response['success'] == true) {
+        // Manejar respuesta exitosa (por ejemplo, guardar token o datos del usuario)
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      throw Exception('Error en el inicio de sesión: $e');
+    }
+  }
+
   // Método genérico para manejar solicitudes HTTP PUT
   Future<dynamic> putRequest(String endpoint, Map<String, dynamic> body, {Map<String, String>? headers}) async {
     try {

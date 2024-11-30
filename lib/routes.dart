@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/welcome_screen.dart';
 import 'package:flutter_application/register_screen.dart';
+import 'package:flutter_application/login_screen.dart';
 
 class AppRoutes {
   // Nombres de las rutas como constantes
   static const String welcome = '/welcome';
   static const String register = '/register';
+  static const String login = '/login';
 
   // Mapa de rutas principales
   static final Map<String, WidgetBuilder> routes = {
     welcome: (context) => WelcomeScreen(),
     register: (context) => RegisterScreen(),
+    login: (context) => LoginScreen(),
   };
 
   // Generación dinámica de rutas con soporte para argumentos

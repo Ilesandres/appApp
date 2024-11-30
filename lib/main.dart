@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme, // Tema personalizado
-      initialRoute: AppRoutes.welcome, // Ruta inicial definida
+      initialRoute: AppRoutes.welcome,
       onGenerateRoute: AppRoutes.onGenerateRoute, // Rutas dinámicas
     );
   }
