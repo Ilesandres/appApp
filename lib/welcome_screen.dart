@@ -6,7 +6,6 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -17,110 +16,76 @@ class WelcomeScreen extends StatelessWidget {
         ),
         child: SafeArea(
           child: Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    radius: 80,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Logo o imagen principal
+                CircleAvatar(
+                  radius: 70,
+                  backgroundColor: Colors.white,
+                  child: Image.asset(
+                    'lib/imagenes/logo.png', // Ajustado para usar el logo local
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(height: 40),
+                // Título
+                const Text(
+                  '¡Bienvenido!',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                // Subtítulo
+                const Text(
+                  'La mejor experiencia en tu aplicación.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white70,
+                  ),
+                ),
+                const SizedBox(height: 40),
+                // Botones de navegación
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/register');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.blue[900],
                     backgroundColor: Colors.white,
-                    child: Image.network(
-                      'https://tse2.mm.bing.net/th?id=OIG3.LoNbQX2sRwljKQrOkvNY&pid=ImgGn',
-                      height: 110,
-                      width: 110,
+                    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  SizedBox(height: 40),
-                  ShaderMask(
-                    shaderCallback: (bounds) => LinearGradient(
-                      colors: [Colors.white, Colors.white70],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ).createShader(bounds),
-                    child: Text(
-                      'RAICES',
-                      style: TextStyle(
-                        fontSize: 48,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        shadows: [
-                          Shadow(
-                            blurRadius: 10.0,
-                            color: Colors.black26,
-                            offset: Offset(5.0, 5.0),
-                          ),
-                        ],
-                      ),
+                  child: const Text(
+                    'Registrarse',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/login');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.blue[900],
+                    backgroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Preservando nuestras lenguas',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
-                      letterSpacing: 1.2,
-                    ),
+                  child: const Text(
+                    'Iniciar Sesión',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-
-                  SizedBox(height: 40),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/login');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.blue[900], backgroundColor: Colors.white,
-                      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                    child: Text(
-                      'Iniciar Sesión',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  OutlinedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/register');
-                    },
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.white, side: BorderSide(color: Colors.white),
-                      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                    child: Text(
-                      'Registrarse',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/main');
-                    },
-                    child: Text(
-                      'Explorar como invitado',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white70,
-                        decoration: TextDecoration.underline,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'services/api_service.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -15,13 +14,25 @@ class _LoginScreenState extends State<LoginScreen> {
   String _password = '';
   bool _isObscure = true;
 
-//funcion para llamar al ApiService y obener datos
-  Future<void> fetchData() async {
-    try{
-      List<dynamic> data = await ApiService().getData();
-    }catch (e){
-      print('Error al obtener datos: $e');
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error al obtener datos: $e')),
+  // Método para manejar el inicio de sesión
+  Future<void> loginUser() async {
+    try {
+      // Llama al servicio API para enviar los datos
+      ApiService apiService = ApiService();
+      bool success = await apiService.login(_email, _password);
+      if (success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Inicio de sesión exitoso')),
+        );
+        Navigator.pushNamed(context, '/main');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Correo o contraseña incorrectos')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al iniciar sesión: $e')),
       );
     }
   }
@@ -29,7 +40,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -45,17 +55,17 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  // Logo de la aplicación
                   CircleAvatar(
                     radius: 70,
                     backgroundColor: Colors.white,
-                    child: Image.network(
-                      'https://tse2.mm.bing.net/th?id=OIG3.LoNbQX2sRwljKQrOkvNY&pid=ImgGn',
-                      height: 100,
-                      width: 100,
+                    child: Image.asset(
+                      'lib/imagenes/logo.png', // Ajustado para usar el logo local
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  SizedBox(height: 30),
-                  Text(
+                  const SizedBox(height: 30),
+                  const Text(
                     'Bienvenido a RAICES',
                     style: TextStyle(
                       fontSize: 28,
@@ -63,26 +73,27 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   Form(
                     key: _formKey,
                     child: Column(
                       children: [
+                        // Campo de correo electrónico
                         TextFormField(
                           decoration: InputDecoration(
                             labelText: 'Correo Electrónico',
-                            prefixIcon: Icon(Icons.email, color: Colors.white),
-                            labelStyle: TextStyle(color: Colors.white),
+                            prefixIcon: const Icon(Icons.email, color: Colors.white),
+                            labelStyle: const TextStyle(color: Colors.white),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
+                              borderSide: const BorderSide(color: Colors.white),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white, width: 2),
+                              borderSide: const BorderSide(color: Colors.white, width: 2),
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                           keyboardType: TextInputType.emailAddress,
                           onSaved: (value) => _email = value ?? '',
                           validator: (value) {
@@ -95,11 +106,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             return null;
                           },
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
+                        // Campo de contraseña
                         TextFormField(
                           decoration: InputDecoration(
                             labelText: 'Contraseña',
-                            prefixIcon: Icon(Icons.lock, color: Colors.white),
+                            prefixIcon: const Icon(Icons.lock, color: Colors.white),
                             suffixIcon: IconButton(
                               icon: Icon(
                                 _isObscure ? Icons.visibility : Icons.visibility_off,
@@ -111,17 +123,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                 });
                               },
                             ),
-                            labelStyle: TextStyle(color: Colors.white),
+                            labelStyle: const TextStyle(color: Colors.white),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
+                              borderSide: const BorderSide(color: Colors.white),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white, width: 2),
+                              borderSide: const BorderSide(color: Colors.white, width: 2),
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                           obscureText: _isObscure,
                           onSaved: (value) => _password = value ?? '',
                           validator: (value) {
@@ -134,44 +146,35 @@ class _LoginScreenState extends State<LoginScreen> {
                             return null;
                           },
                         ),
-                        SizedBox(height: 30),
+                        const SizedBox(height: 30),
+                        // Botón de inicio de sesión
                         ElevatedButton(
-                          onPressed: () async{
+                          onPressed: () async {
                             if (_formKey.currentState?.validate() == true) {
                               _formKey.currentState?.save();
-                             // Llama al servicio API para enviar los datos
-                              ApiService apiService = ApiService();
-                              bool success = await apiService.login(_email, _password);
-                                if(success){
-                                   ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Iniciando sesión...'))
-                                   );
-                                  Navigator.pushNamed(context, '/main');
-                                }else{
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Error al iniciar sesión...'))
-                                  );
-                                }
-                               }
+                              await loginUser();
+                            }
                           },
                           style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.blue[900], backgroundColor: Colors.white,
-                            padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                            foregroundColor: Colors.blue[900],
+                            backgroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30),
                             ),
                           ),
-                          child: Text(
+                          child: const Text(
                             'Iniciar Sesión',
                             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
+                        // Enlace a la pantalla de registro
                         TextButton(
                           onPressed: () {
                             Navigator.pushNamed(context, '/register');
                           },
-                          child: Text(
+                          child: const Text(
                             '¿No tienes una cuenta? Regístrate',
                             style: TextStyle(color: Colors.white, fontSize: 16),
                           ),

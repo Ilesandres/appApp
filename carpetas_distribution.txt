@@ -1,4 +1,4 @@
-flutter_application_branch_nenfar/
+lutter_application_branch_nenfar/
 │
 ├── android/                   # Código nativo de Android (Java/Kotlin)
 ├── ios/                       # Código nativo de iOS (Swift/Objective-C)
@@ -7,6 +7,8 @@ flutter_application_branch_nenfar/
 │   │   └──logo.png
 │   ├──services
 │   │   └──api_service.dart
+│   ├──widgets
+│   │   └──letter_button.dart 
 │   ├──abc.dart
 │   ├──chat.dart
 │   ├──login_sreen.dart
@@ -15,16 +17,14 @@ flutter_application_branch_nenfar/
 │   ├──navigation_buttons.dart
 │   ├──profile.dart
 │   ├──register_screen.dart
-│   ├── src/                   # Organización del código fuente
-│   │   ├── models/            # Modelos de datos
-│   │   ├── views/             # Vistas (UI)
-│   │   ├── controllers/       # Lógica y controladores (opcional)
-│   │   ├── services/          # Servicios (API, DB, etc.)
-│   │   ├── widgets/           # Widgets reutilizables
-│   │   ├── utils/             # Utilidades y funciones auxiliares
-│   │   └── themes/            # Estilos y configuraciones visuales
-│   └── routes.dart            # Configuración de rutas y navegación
-│
+│   ├──testConnection.dart
+│   ├──routes.dart
+│   ├──theme.dart
+│   └──welcome_screen.dart
+├──linux
+├──web
+├──macos
+├──windows
 ├── test/                      # Pruebas unitarias y de integración
 │
 ├── pubspec.yaml               # Archivo de configuración del proyecto y dependencias

@@ -24,11 +24,17 @@ class NavigationButtons extends StatelessWidget {
           Navigator.pushReplacementNamed(context, route);
         }
       },
-      child: Icon(icon, size: 30),
+      child: Icon(
+        icon,
+        size: 30,
+        color: Colors.white, // Color de los íconos
+      ),
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.all(15),
         minimumSize: Size(60, 60),
         shape: CircleBorder(),
+        primary: Colors.blue[900], // Color de fondo del botón
+        onPrimary: Colors.white, // Color de los íconos
       ),
     );
   }

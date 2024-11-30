@@ -62,7 +62,7 @@ class Chat extends StatelessWidget {
                 },
               ),
             ),
-            NavigationButtons(),
+            NavigationButtons(),  // Asegúrate de que este componente esté bien integrado
           ],
         ),
       ),
@@ -99,85 +99,80 @@ class ConversationCard extends StatelessWidget {
     );
   }
 
-void _showConversationDialog(BuildContext context, Map<String, dynamic> conversation) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return Dialog(
-        insetPadding: EdgeInsets.zero,
-        child: Container(
-          width: double.infinity,
-          constraints: BoxConstraints(
-            maxHeight: MediaQuery.of(context).size.height * 0.7,
-            maxWidth: MediaQuery.of(context).size.width * 0.9,
-          ),
-          child: Column(
-            children: [
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.all(20),              
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  ),
-                  color: Colors.blue[900],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      conversation['title'],
-                      style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-                      
-            
+  void _showConversationDialog(BuildContext context, Map<String, dynamic> conversation) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          insetPadding: EdgeInsets.zero,
+          child: Container(
+            width: double.infinity,
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height * 0.7,
+              maxWidth: MediaQuery.of(context).size.width * 0.9,
+            ),
+            child: Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
                     ),
-                    SizedBox(height: 5),
-                    Text(
-                      'Lengua: ${conversation['language']}',
-                      style: TextStyle(color: Colors.white70, fontSize: 16),
-                      
+                    color: Colors.blue[900],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        conversation['title'],
+                        style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 5),
+                      Text(
+                        'Lengua: ${conversation['language']}',
+                        style: TextStyle(color: Colors.white70, fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    padding: EdgeInsets.all(16),
+                    itemCount: (conversation['messages'] as List).length,
+                    itemBuilder: (context, index) {
+                      final message = conversation['messages'][index];
+                      return MessageBubble(
+                        text: message['text'],
+                        translation: message['translation'],
+                        isUser: message['isUser'],
+                      );
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue[900],
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                     ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: ListView.builder(
-                  padding: EdgeInsets.all(16),
-                  itemCount: (conversation['messages'] as List).length,
-                  itemBuilder: (context, index) {
-                    final message = conversation['messages'][index];
-                    return MessageBubble(
-                      text: message['text'],
-                      translation: message['translation'],
-                      isUser: message['isUser'],
-                    );
-                  },
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(8),
-                child: ElevatedButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue[900],
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                  ),
-                  child: Text(
-                    'Cerrar',
-                    style: TextStyle(color: Colors.white),
+                    child: Text('Cerrar'),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      );
-    },
-  );
+        );
+      },
+    );
+  }
 }
-}
+
 class MessageBubble extends StatelessWidget {
   final String text;
   final String translation;
@@ -205,7 +200,7 @@ class MessageBubble extends StatelessWidget {
                 IconButton(
                   icon: Icon(Icons.play_arrow, size: 20),
                   onPressed: () {
-                    // TODO: Implementar reproducción de audio
+                    // Aquí implementarás la lógica para reproducir audio en el futuro.
                     print('Reproduciendo audio: $text');
                   },
                   padding: EdgeInsets.zero,

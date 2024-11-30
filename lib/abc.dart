@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'navigation_buttons.dart';
+import 'letter_button.dart'; // Importa LetterButton desde su archivo
+import 'navigation_buttons.dart'; // Importa los botones de navegación
 
 class Abc extends StatelessWidget {
   static const String routeName = '/abc';
 
-  const Abc({super.key});
+  const Abc({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // Lista del alfabeto en español
     final List<Map<String, String>> abcEspanol = [
       {'letter': 'A', 'pronunciation': 'a'},
       {'letter': 'B', 'pronunciation': 'be'},
@@ -40,7 +42,7 @@ class Abc extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Alfabeto Español'),
+        title: const Text('Alfabeto Español'),
         backgroundColor: Colors.blue[900],
         elevation: 0,
       ),
@@ -56,8 +58,8 @@ class Abc extends StatelessWidget {
           children: [
             Expanded(
               child: GridView.builder(
-                padding: EdgeInsets.all(16),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                padding: const EdgeInsets.all(16),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   childAspectRatio: 1,
                   crossAxisSpacing: 10,
@@ -68,79 +70,22 @@ class Abc extends StatelessWidget {
                   return LetterButton(
                     letter: abcEspanol[index]['letter']!,
                     pronunciation: abcEspanol[index]['pronunciation']!,
+                    onTap: () {
+                      // Acciones al presionar un botón
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Letra: ${abcEspanol[index]['letter']}, Pronunciación: ${abcEspanol[index]['pronunciation']}',
+                          ),
+                        ),
+                      );
+                    },
                   );
                 },
               ),
             ),
-            NavigationButtons(),
+            const NavigationButtons(), // Botones de navegación
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class LetterButton extends StatefulWidget {
-  final String letter;
-  final String pronunciation;
-
-  const LetterButton({Key? key, required this.letter, required this.pronunciation}) : super(key: key);
-
-  @override
-  _LetterButtonState createState() => _LetterButtonState();
-}
-
-class _LetterButtonState extends State<LetterButton> {
-  bool _isPressed = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapDown: (_) => setState(() => _isPressed = true),
-      onTapUp: (_) => setState(() => _isPressed = false),
-      onTapCancel: () => setState(() => _isPressed = false),
-      child: AnimatedContainer(
-        duration: Duration(milliseconds: 150),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: _isPressed
-                ? [Colors.blue[600]!, Colors.blue[800]!]
-                : [Colors.blue[400]!, Colors.blue[600]!],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.3),
-              spreadRadius: 1,
-              blurRadius: 5,
-              offset: Offset(0, 3),
-            ),
-          ],
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                widget.letter,
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-              SizedBox(height: 4),
-              Text(
-                widget.pronunciation,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.white70,
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );

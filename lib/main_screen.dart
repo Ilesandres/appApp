@@ -4,12 +4,12 @@ import 'navigation_buttons.dart';
 class MainScreen extends StatelessWidget {
   static const String routeName = '/main';
 
-  final List<Map<String, dynamic>> lessons = [
-    {'title': 'Saludos', 'completed': true, 'color': Colors.green[600]!},
-    {'title': 'Números', 'completed': true, 'color': Colors.blue[600]!},
-    {'title': 'Familia', 'completed': false, 'color': Colors.orange[600]!},
-    {'title': 'Comida', 'completed': false, 'color': Colors.red[600]!},
-    {'title': 'Animales', 'completed': false, 'color': Colors.purple[600]!},
+  final List<Lesson> lessons = [
+    Lesson(title: 'Saludos', completed: true, color: Colors.green[600]!),
+    Lesson(title: 'Números', completed: true, color: Colors.blue[600]!),
+    Lesson(title: 'Familia', completed: false, color: Colors.orange[600]!),
+    Lesson(title: 'Comida', completed: false, color: Colors.red[600]!),
+    Lesson(title: 'Animales', completed: false, color: Colors.purple[600]!),
   ];
 
   @override
@@ -25,6 +25,9 @@ class MainScreen extends StatelessWidget {
                 'https://tse2.mm.bing.net/th?id=OIG3.LoNbQX2sRwljKQrOkvNY&pid=ImgGn',
                 height: 30,
                 width: 30,
+                errorBuilder: (context, error, stackTrace) {
+                  return Icon(Icons.person, color: Colors.grey, size: 30);
+                },
               ),
             ),
             SizedBox(width: 10),
@@ -58,11 +61,9 @@ class MainScreen extends StatelessWidget {
                 itemCount: lessons.length,
                 itemBuilder: (context, index) {
                   return LessonCard(
-                    title: lessons[index]['title'],
-                    completed: lessons[index]['completed'],
-                    color: lessons[index]['color'],
+                    lesson: lessons[index],
                     onTap: () {
-                      print('Lección seleccionada: ${lessons[index]["title"]}');
+                      print('Lección seleccionada: ${lessons[index].title}');
                     },
                   );
                 },
@@ -76,73 +77,14 @@ class MainScreen extends StatelessWidget {
   }
 }
 
-class LessonCard extends StatelessWidget {
+class Lesson {
   final String title;
   final bool completed;
   final Color color;
-  final VoidCallback onTap;
 
-  const LessonCard({
-    Key? key,
+  Lesson({
     required this.title,
     required this.completed,
     required this.color,
-    required this.onTap,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      margin: EdgeInsets.symmetric(vertical: 8),
-      child: InkWell(
-        onTap: onTap,
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            gradient: LinearGradient(
-              colors: [color, color.withOpacity(0.7)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      completed ? 'Completado' : 'Por completar',
-                      style: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
-                Icon(
-                  completed ? Icons.check_circle : Icons.play_circle_fill,
-                  color: Colors.white,
-                  size: 36,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  });
 }

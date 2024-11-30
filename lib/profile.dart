@@ -38,12 +38,23 @@ class Profile extends StatelessWidget {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Center(child: CircularProgressIndicator());
                     } else if (snapshot.hasError) {
-                      return Center(child: Text('Error: ${snapshot.error}'));
+                      return Center(
+                        child: Text(
+                          'Hubo un problema al cargar tu información. Por favor, intenta nuevamente.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.red, fontSize: 16),
+                        ),
+                      );
                     } else if (snapshot.hasData) {
                       final userData = snapshot.data!;
                       return _buildProfileContent(context, userData);
                     } else {
-                      return Center(child: Text('No se encontraron datos de usuario'));
+                      return Center(
+                        child: Text(
+                          'No se encontraron datos de usuario',
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        ),
+                      );
                     }
                   },
                 ),
@@ -58,71 +69,77 @@ class Profile extends StatelessWidget {
 
   // Construye la interfaz de perfil con los datos del usuario
   Widget _buildProfileContent(BuildContext context, Map<String, dynamic> userData) {
-    return Column(
-      children: [
-        SizedBox(height: 20),
-        CircleAvatar(
-          radius: 60,
-          backgroundColor: Colors.white,
-          child: CircleAvatar(
-            radius: 55,
-            backgroundImage: NetworkImage('https://img.freepik.com/psd-gratis/ilustracion-3d-avatar-o-perfil-humano_23-2150671126.jpg'),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        children: [
+          SizedBox(height: 20),
+          CircleAvatar(
+            radius: 60,
+            backgroundColor: Colors.white,
+            child: CircleAvatar(
+              radius: 55,
+              backgroundImage: NetworkImage(
+                userData['profileImage'] ??
+                    'https://img.freepik.com/psd-gratis/ilustracion-3d-avatar-o-perfil-humano_23-2150671126.jpg',
+              ),
+            ),
           ),
-        ),
-        SizedBox(height: 20),
-        Text(
-          userData['name'] ?? 'Nombre de Usuario',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
+          SizedBox(height: 20),
+          Text(
+            userData['name'] ?? 'Nombre de Usuario',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
-        ),
-        SizedBox(height: 20),
-        _buildProfileButton(
-          icon: Icons.person,
-          title: 'Nombre: ${userData['name'] ?? 'N/A'}',
-          onTap: () {},
-        ),
-        _buildProfileButton(
-          icon: Icons.email,
-          title: 'Correo: ${userData['mail'] ?? 'N/A'}',
-          onTap: () {},
-        ),
-        _buildProfileButton(
-          icon: Icons.calendar_today,
-          title: 'Fecha de unión: ${userData['createdAt'] ?? 'N/A'}',
-          onTap: () {},
-        ),
-        _buildProfileButton(
-          icon: Icons.bar_chart,
-          title: 'Estadísticas',
-          onTap: () {
-            // Navegar a la pantalla de estadísticas
-          },
-        ),
-        _buildProfileButton(
-          icon: Icons.emoji_events,
-          title: 'Logros',
-          onTap: () {
-            // Navegar a la pantalla de logros
-          },
-        ),
-        _buildProfileButton(
-          icon: Icons.settings,
-          title: 'Configuración del perfil',
-          onTap: () {
-            // Navegar a la pantalla de configuración del perfil
-          },
-        ),
-        _buildProfileButton(
-          icon: Icons.logout,
-          title: 'Cerrar sesión',
-          onTap: () {
-            Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
-          },
-        ),
-      ],
+          SizedBox(height: 20),
+          _buildProfileButton(
+            icon: Icons.person,
+            title: 'Nombre: ${userData['name'] ?? 'N/A'}',
+            onTap: () {},
+          ),
+          _buildProfileButton(
+            icon: Icons.email,
+            title: 'Correo: ${userData['mail'] ?? 'N/A'}',
+            onTap: () {},
+          ),
+          _buildProfileButton(
+            icon: Icons.calendar_today,
+            title: 'Fecha de unión: ${userData['createdAt'] ?? 'N/A'}',
+            onTap: () {},
+          ),
+          _buildProfileButton(
+            icon: Icons.bar_chart,
+            title: 'Estadísticas',
+            onTap: () {
+              // Navegar a la pantalla de estadísticas
+            },
+          ),
+          _buildProfileButton(
+            icon: Icons.emoji_events,
+            title: 'Logros',
+            onTap: () {
+              // Navegar a la pantalla de logros
+            },
+          ),
+          _buildProfileButton(
+            icon: Icons.settings,
+            title: 'Configuración del perfil',
+            onTap: () {
+              // Navegar a la pantalla de configuración del perfil
+            },
+          ),
+          _buildProfileButton(
+            icon: Icons.logout,
+            title: 'Cerrar sesión',
+            onTap: () {
+              Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+            },
+          ),
+        ],
+      ),
     );
   }
 

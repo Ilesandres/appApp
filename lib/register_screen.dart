@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:flutter_application/services/api_service.dart';
+
 class RegisterScreen extends StatefulWidget {
   static const String routeName = '/register';
 
@@ -9,36 +9,31 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-
   final _formKey = GlobalKey<FormState>();
   String _name = '';
   String _email = '';
   String _password = '';
   bool _isObscure = true;
 
-    Future<void> registerUser() async{
-    final response = await http.post(
-      Uri.parse('http://127.0.0.1:5000/add_data'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, String>{
-        'name' : _name,
-        'mail':_email,
-        'password': _password,
-      }),
-    );
-    if(response.statusCode == 201){
-      //Registrp exitoso
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Registro exitoso'))
-      );
-            Navigator.pushNamed(context, '/login');
+  final ApiService _apiService = ApiService(); // Instancia de ApiService
 
-    }else{
-      //manejo de errores
+  Future<void> _registerUser() async {
+    try {
+      final response = await _apiService.postRequest(
+        'add_data',
+        {
+          'name': _name,
+          'mail': _email,
+          'password': _password,
+        },
+      );
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: ${response.body}')),
+        SnackBar(content: Text('Registro exitoso: ${response['message'] ?? 'Usuario creado'}')),
+      );
+      Navigator.pushNamed(context, '/login'); // Redirige al login después del registro
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $e')),
       );
     }
   }
@@ -46,13 +41,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.blue[900]!, Colors.blue[300]!],
+            colors: [Colors.blue[900] ?? Colors.blue, Colors.blue[300] ?? Colors.blue],
           ),
         ),
         child: SafeArea(
@@ -69,6 +63,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       'https://tse2.mm.bing.net/th?id=OIG3.LoNbQX2sRwljKQrOkvNY&pid=ImgGn',
                       height: 100,
                       width: 100,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Icon(Icons.error, size: 100, color: Colors.red);
+                      },
                     ),
                   ),
                   SizedBox(height: 30),
@@ -114,7 +111,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             labelText: 'Correo Electrónico',
                             prefixIcon: Icon(Icons.email, color: Colors.white),
                             labelStyle: TextStyle(color: Colors.white),
-                            
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.white),
                               borderRadius: BorderRadius.circular(12),
@@ -178,13 +174,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         SizedBox(height: 30),
                         ElevatedButton(
-                          onPressed: () async{
+                          onPressed: () async {
                             if (_formKey.currentState?.validate() == true) {
                               _formKey.currentState?.save();
-                              await registerUser();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Registro Exitoso')),
-                              );
+                              await _registerUser(); // Llamada al método de registro
                             }
                           },
                           style: ElevatedButton.styleFrom(

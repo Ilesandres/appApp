@@ -8,6 +8,18 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "audio_session",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/audio_session-0.1.21",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "auto_route",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/auto_route-7.9.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "boolean_selector",
       "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/boolean_selector-2.1.1",
       "packageUri": "lib/",
@@ -32,6 +44,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "crypto",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/crypto-3.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
       "name": "cupertino_icons",
       "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/cupertino_icons-1.0.8",
       "packageUri": "lib/",
@@ -42,6 +60,18 @@
       "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/fake_async-1.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "ffi",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/ffi-2.1.3",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
+    },
+    {
+      "name": "fixnum",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/fixnum-1.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.1"
     },
     {
       "name": "flutter",
@@ -62,6 +92,12 @@
       "languageVersion": "3.3"
     },
     {
+      "name": "flutter_web_plugins",
+      "rootUri": "file:///C:/Users/Andres/Documents/flutter_windows_3.19.6-stable/flutter/packages/flutter_web_plugins",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
       "name": "http",
       "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/http-0.13.6",
       "packageUri": "lib/",
@@ -72,6 +108,24 @@
       "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/http_parser-4.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "just_audio",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/just_audio-0.9.42",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "just_audio_platform_interface",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/just_audio_platform_interface-4.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "just_audio_web",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/just_audio_web-0.4.13",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
     },
     {
       "name": "leak_tracker",
@@ -116,10 +170,76 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "nested",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/nested-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "path",
       "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/path-1.9.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
+    },
+    {
+      "name": "path_provider",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider-2.1.5",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
+      "name": "path_provider_android",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_android-2.2.14",
+      "packageUri": "lib/",
+      "languageVersion": "3.5"
+    },
+    {
+      "name": "path_provider_foundation",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_foundation-2.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "path_provider_linux",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_linux-2.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "path_provider_platform_interface",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_platform_interface-2.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "path_provider_windows",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_windows-2.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "platform",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/platform-3.1.6",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "plugin_platform_interface",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/plugin_platform_interface-2.1.8",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "provider",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/provider-6.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "rxdart",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/rxdart-0.28.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "sky_engine",
@@ -132,6 +252,12 @@
       "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/source_span-1.10.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "sprintf",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/sprintf-7.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "stack_trace",
@@ -170,6 +296,12 @@
       "languageVersion": "3.5"
     },
     {
+      "name": "uuid",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/uuid-4.5.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "vector_math",
       "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/vector_math-2.1.4",
       "packageUri": "lib/",
@@ -182,13 +314,25 @@
       "languageVersion": "3.3"
     },
     {
+      "name": "web",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/web-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
+      "name": "xdg_directories",
+      "rootUri": "file:///C:/Users/Andres/AppData/Local/Pub/Cache/hosted/pub.dev/xdg_directories-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
+    },
+    {
       "name": "flutter_application",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-11-29T23:31:35.888953Z",
+  "generated": "2024-11-30T21:25:17.673385Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
   "flutterRoot": "file:///C:/Users/Andres/Documents/flutter_windows_3.19.6-stable/flutter",
