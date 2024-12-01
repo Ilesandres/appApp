@@ -17,10 +17,19 @@ class User {
 
   // Crear un User desde un Map
   factory User.fromMap(Map<String, dynamic> map) {
-    return User(
-      email: map['email'] ?? '',
-      dataToken: map['dataToken'] ?? '',
-    );
+    if (map.containsKey('email') && map.containsKey('dataToken')) {
+      return User(
+        email: map['email'] ?? '',
+        dataToken: map['dataToken'] ?? '',
+      );
+    } else {
+      throw Exception('Datos del usuario incompletos en el mapa');
+    }
+  }
+
+  @override
+  String toString() {
+    return 'User(email: $email, dataToken: $dataToken)';
   }
 }
 
@@ -31,9 +40,8 @@ class UserService {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       User user = User(email: email, dataToken: dataToken);
 
-      // Guardar los datos del usuario como JSON
       await prefs.setString('user', jsonEncode(user.toMap()));
-      print('Usuario guardado localmente: $email');
+      print('Usuario guardado localmente: ${user.email}');
       return true;
     } catch (e) {
       print('Error al guardar usuario: $e');
@@ -49,8 +57,11 @@ class UserService {
 
       if (userData != null) {
         Map<String, dynamic> userMap = jsonDecode(userData);
-        return User.fromMap(userMap);
+        final user = User.fromMap(userMap);
+        print('Usuario recuperado: $user');
+        return user;
       }
+      print('No se encontró usuario guardado');
       return null;
     } catch (e) {
       print('Error al recuperar usuario: $e');

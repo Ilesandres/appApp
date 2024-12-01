@@ -1,21 +1,9 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'package:flutter_application/services/api_service.dart';
 import 'navigation_buttons.dart';
 
 class Profile extends StatelessWidget {
-  static const String routeName = '/profile';
-
-  // Función para obtener los datos del usuario desde el backend
-  Future<Map<String, dynamic>> fetchUserData() async {
-    final response = await http.get(Uri.parse('http://127.0.0.1:5000/get_user'));
-
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body); // Convierte la respuesta JSON a un Map
-    } else {
-      throw Exception('Error al cargar los datos del usuario');
-    }
-  }
+  final ApiService _apiService = ApiService();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +21,7 @@ class Profile extends StatelessWidget {
             Expanded(
               child: SingleChildScrollView(
                 child: FutureBuilder<Map<String, dynamic>>(
-                  future: fetchUserData(),
+                  future: _apiService.fetchUserData(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Center(child: CircularProgressIndicator());
@@ -80,14 +68,14 @@ class Profile extends StatelessWidget {
             child: CircleAvatar(
               radius: 55,
               backgroundImage: NetworkImage(
-                userData['profileImage'] ??
+                userData['data']['profileImage'] ??
                     'https://img.freepik.com/psd-gratis/ilustracion-3d-avatar-o-perfil-humano_23-2150671126.jpg',
               ),
             ),
           ),
           SizedBox(height: 20),
           Text(
-            userData['name'] ?? 'Nombre de Usuario',
+            userData['data']['name'] ?? 'Nombre de Usuario',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -97,17 +85,17 @@ class Profile extends StatelessWidget {
           SizedBox(height: 20),
           _buildProfileButton(
             icon: Icons.person,
-            title: 'Nombre: ${userData['name'] ?? 'N/A'}',
+            title: 'Nombre: ${userData['data']['name'] ?? 'N/A'}',
             onTap: () {},
           ),
           _buildProfileButton(
             icon: Icons.email,
-            title: 'Correo: ${userData['mail'] ?? 'N/A'}',
+            title: 'Correo: ${userData['user']['mail'] ?? 'N/A'}',
             onTap: () {},
           ),
           _buildProfileButton(
             icon: Icons.calendar_today,
-            title: 'Fecha de unión: ${userData['createdAt'] ?? 'N/A'}',
+            title: 'Fecha de unión: ${userData['data']['createdAt'] ?? 'N/A'}',
             onTap: () {},
           ),
           _buildProfileButton(

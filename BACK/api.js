@@ -8,7 +8,7 @@ const port = 5000; // Puerto del servidor
 
 // Configuración de CORS
 app.use(cors({
-    origin: 'http://localhost:53761', // Ajustar según el frontend
+    origin: 'http://localhost:52339', // Ajustar según el frontend
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
@@ -111,6 +111,40 @@ app.post('/api/login', (req, res) => {
     });
 });
 
+app.get('/api/getUser',(req,res)=>{
+    console.log('usuario encontrado');
+    console.log(req.query);
+
+    db.query('SELECT * FROM users WHERE idUser = ? AND mail = ?', [req.query.id, req.query.email], (err, result) => {
+       if(err){
+           console.log("Error al consultar la base de datos:", err);
+           res.status(500).json({message:'Error al consultar la base de datos', });
+       }else{
+           if(result.length > 0 && result.length<2){
+               console.log(result[0]);
+               db.query('SELECT * FROM people WHERE idUser = ?', [req.query.id], (err1, result1) => {
+                   if(err1){
+                       console.log("Error al consultar la base de datos:", err1);
+                       res.status(500).json({message:'Error al consultar la base de datos people', });
+                   }else{
+                       if(result1.length > 0 && result1.length<2){
+                           console.log(result1[0]);
+                           result[0].name = result1[0].name;
+                           res.status(200).json({message:'Usuario encontrado', user: result[0], data:result1[0]});
+                       }else{
+                           res.status(404).json({message:'Usuario no encontrado'});
+                       }
+                   }
+               })
+
+
+           }else{
+               res.status(404).json({message:'Usuario no encontrado'});
+           }
+       }
+    });
+})
+
 // Ruta de prueba para obtener datos
 app.get('/api/data', (req, res) => {
     res.json({ message: 'Hola desde el backend' });
@@ -121,6 +155,8 @@ app.post('/api/data', (req, res) => {
     const data = req.body;
     console.log("Datos recibidos:", data);
     res.json({ message: 'Datos recibidos', data });
+
+
 });
 
 // Iniciar el servidor
