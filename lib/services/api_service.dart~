@@ -1,8 +1,9 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_application/services/user_service.dart';
 
 class ApiService {
-  final String baseUrl = "http://localhost:5000"; // URL base actualizada según tu proyecto
+  final String baseUrl = "http://localhost:5000"; 
 
   // Método genérico para manejar solicitudes HTTP GET
   Future<dynamic> getRequest(String endpoint, {Map<String, String>? headers}) async {
@@ -37,7 +38,6 @@ class ApiService {
         'email': email,
       });
 
-      // Corregido el operador de comparación
       if (response['message'] == 'usuario registrado') {
         return true;
       } else {
@@ -52,19 +52,24 @@ class ApiService {
   // Método para manejar el login
   Future<bool> login(String email, String password) async {
     try {
-
       final response = await postRequest('/api/login', {
         'email': email,
         'password': password,
       });
 
-
       // Verificar la respuesta del backend
       if (response['success'] == true) {
-        // Manejar respuesta exitosa (por ejemplo, guardar token o datos del usuario)
+        print("Login exitoso");
+        print(response);
+
+        await UserService().createUser(
+          response['user']['email'],
+          (response['user']['dataToken']).toString(),
+        );
+
         return true;
       } else {
-        print(response);
+        print("Error en login: ${response['message']}");
         return false;
       }
     } catch (e) {

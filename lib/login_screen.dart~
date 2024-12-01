@@ -21,16 +21,20 @@ class _LoginScreenState extends State<LoginScreen> {
       ApiService apiService = ApiService();
       bool success = await apiService.login(_email, _password);
       if (success) {
+        // Notificación de inicio exitoso
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Inicio de sesión exitoso')),
+          const SnackBar(content: Text('Inicio de sesión exitoso')),
         );
+        // Redirección a la pantalla principal
         Navigator.pushNamed(context, '/main');
       } else {
+        // Mensaje de error si las credenciales son incorrectas
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Correo o contraseña incorrectos')),
+          const SnackBar(content: Text('Correo o contraseña incorrectos')),
         );
       }
     } catch (e) {
+      // Manejo de errores en la solicitud
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al iniciar sesión: $e')),
       );
@@ -60,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     radius: 70,
                     backgroundColor: Colors.white,
                     child: Image.asset(
-                      'lib/imagenes/logo.png', // Ajustado para usar el logo local
+                      'lib/imagenes/logo.png', // Ruta del logo local
                       fit: BoxFit.cover,
                     ),
                   ),

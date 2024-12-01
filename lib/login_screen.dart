@@ -17,24 +17,20 @@ class _LoginScreenState extends State<LoginScreen> {
   // Método para manejar el inicio de sesión
   Future<void> loginUser() async {
     try {
-      // Llama al servicio API para enviar los datos
       ApiService apiService = ApiService();
       bool success = await apiService.login(_email, _password);
       if (success) {
-        // Notificación de inicio exitoso
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Inicio de sesión exitoso')),
         );
-        // Redirección a la pantalla principal
         Navigator.pushNamed(context, '/main');
       } else {
-        // Mensaje de error si las credenciales son incorrectas
+
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Correo o contraseña incorrectos')),
         );
       }
     } catch (e) {
-      // Manejo de errores en la solicitud
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al iniciar sesión: $e')),
       );
@@ -59,12 +55,12 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Logo de la aplicación
+
                   CircleAvatar(
                     radius: 70,
                     backgroundColor: Colors.white,
                     child: Image.asset(
-                      'lib/imagenes/logo.png', // Ruta del logo local
+                      'lib/imagenes/logo.png',
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -82,7 +78,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     key: _formKey,
                     child: Column(
                       children: [
-                        // Campo de correo electrónico
                         TextFormField(
                           decoration: InputDecoration(
                             labelText: 'Correo Electrónico',
@@ -111,7 +106,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                         ),
                         const SizedBox(height: 20),
-                        // Campo de contraseña
                         TextFormField(
                           decoration: InputDecoration(
                             labelText: 'Contraseña',
@@ -151,7 +145,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                         ),
                         const SizedBox(height: 30),
-                        // Botón de inicio de sesión
                         ElevatedButton(
                           onPressed: () async {
                             if (_formKey.currentState?.validate() == true) {

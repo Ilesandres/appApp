@@ -8,7 +8,7 @@ const port = 5000; // Puerto del servidor
 
 // Configuración de CORS
 app.use(cors({
-    origin: 'http://localhost:49951', // Ajustar según el frontend
+    origin: 'http://localhost:53761', // Ajustar según el frontend
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
@@ -97,11 +97,10 @@ app.post('/api/login', (req, res) => {
             }
 
             if (result1) {
-                console.log("Inicio de sesión exitoso para:", email);
                 return res.status(200).json({
                     success: true,
                     message: 'Inicio de sesión exitoso',
-                    user: { id: user.id, email: user.mail }
+                    user: { dataToken: user.idUser, email: user.mail }
                 });
             } else {
                 console.log(passwordAlmacenado);

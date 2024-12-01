@@ -1,0 +1,31 @@
+name: flutter_application
+description: "A new Flutter project."
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^0.13.3
+  cupertino_icons: ^1.0.8
+  provider: ^6.1.2  # Cambié la versión aquí
+  just_audio: ^0.9.18
+  auto_route: ^7.1.0
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  # Si necesitas especificar recursos adicionales como imágenes, fuentes, etc.
+  assets:
+    - lib/imagenes/

@@ -33,8 +33,8 @@ class NavigationButtons extends StatelessWidget {
         padding: EdgeInsets.all(15),
         minimumSize: Size(60, 60),
         shape: CircleBorder(),
-        primary: Colors.blue[900], // Color de fondo del botón
-        onPrimary: Colors.white, // Color de los íconos
+        backgroundColor: Colors.blue[900], // Color de fondo del botón
+        foregroundColor: Colors.white, // Color de los íconos
       ),
     );
   }

@@ -88,3 +88,32 @@ class Lesson {
     required this.color,
   });
 }
+
+class LessonCard extends StatelessWidget {
+  final Lesson lesson;
+  final VoidCallback onTap;
+
+  const LessonCard({required this.lesson, required this.onTap, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: lesson.color,
+      margin: EdgeInsets.symmetric(vertical: 8.0),
+      child: ListTile(
+        title: Text(
+          lesson.title,
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        trailing: lesson.completed
+            ? Icon(Icons.check_circle, color: Colors.white)
+            : Icon(Icons.radio_button_unchecked, color: Colors.white),
+        onTap: onTap,
+      ),
+    );
+  }
+}
