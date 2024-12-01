@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ApiService {
-  final String baseUrl = "http://10.0.2.2:5000/"; // URL base actualizada según tu proyecto
+  final String baseUrl = "http://localhost:5000"; // URL base actualizada según tu proyecto
 
   // Método genérico para manejar solicitudes HTTP GET
   Future<dynamic> getRequest(String endpoint, {Map<String, String>? headers}) async {
@@ -25,6 +25,27 @@ class ApiService {
       return _handleResponse(response);
     } catch (e) {
       throw Exception('Error en la solicitud POST: $e');
+    }
+  }
+
+  // Método para registrar un nuevo usuario
+  Future<bool> register(String username, String email, String password) async {
+    try {
+      final response = await postRequest('/api/register', {
+        'username': username,
+        'password': password,
+        'email': email,
+      });
+
+      // Corregido el operador de comparación
+      if (response['message'] == 'usuario registrado') {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      throw Exception('Error en el registro: $e');
     }
   }
 

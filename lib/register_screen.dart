@@ -17,24 +17,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   final ApiService _apiService = ApiService(); // Instancia de ApiService
 
+  // Método para registrar al usuario
   Future<void> _registerUser() async {
-    try {
-      final response = await _apiService.postRequest(
-        'add_data',
-        {
-          'name': _name,
-          'mail': _email,
-          'password': _password,
-        },
-      );
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Registro exitoso: ${response['message'] ?? 'Usuario creado'}')),
-      );
-      Navigator.pushNamed(context, '/login'); // Redirige al login después del registro
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: $e')),
-      );
+    if (_formKey.currentState?.validate() == true) {
+      // Guardamos los valores del formulario
+      _formKey.currentState?.save();
+
+      try {
+        // Llamamos al método register de ApiService con los datos del formulario
+        bool success = await _apiService.register(_name, _email, _password);
+
+        if (success) {
+          // Mostrar mensaje de éxito
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Registro exitoso, redirigiendo a Login')),
+          );
+          // Asegúrate de que el mensaje sea visible antes de la redirección
+          Future.delayed(Duration(seconds: 2), () {
+            Navigator.pushNamed(context, '/login');
+          });
+        } else {
+          // Mostrar mensaje de error si el registro no fue exitoso
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Hubo un error al registrar el usuario')),
+          );
+        }
+      } catch (e) {
+        // Manejar excepciones y mostrar un mensaje de error
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: $e')),
+        );
+      }
     }
   }
 
@@ -63,8 +76,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       'https://tse2.mm.bing.net/th?id=OIG3.LoNbQX2sRwljKQrOkvNY&pid=ImgGn',
                       height: 100,
                       width: 100,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        } else {
+                          return const CircularProgressIndicator();
+                        }
+                      },
                       errorBuilder: (context, error, stackTrace) {
-                        return Icon(Icons.error, size: 100, color: Colors.red);
+                        return const Icon(Icons.error, size: 100, color: Colors.red);
                       },
                     ),
                   ),
@@ -82,21 +102,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     key: _formKey,
                     child: Column(
                       children: [
+                        // Campo de nombre
                         TextFormField(
                           decoration: InputDecoration(
                             labelText: 'Nombre',
-                            prefixIcon: Icon(Icons.person, color: Colors.white),
-                            labelStyle: TextStyle(color: Colors.white),
+                            prefixIcon: const Icon(Icons.person, color: Colors.white),
+                            labelStyle: const TextStyle(color: Colors.white),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
+                              borderSide: const BorderSide(color: Colors.white),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white, width: 2),
+                              borderSide: const BorderSide(color: Colors.white, width: 2),
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                           onSaved: (value) => _name = value ?? '',
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -106,21 +127,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           },
                         ),
                         SizedBox(height: 20),
+
+                        // Campo de correo electrónico
                         TextFormField(
                           decoration: InputDecoration(
                             labelText: 'Correo Electrónico',
-                            prefixIcon: Icon(Icons.email, color: Colors.white),
-                            labelStyle: TextStyle(color: Colors.white),
+                            prefixIcon: const Icon(Icons.email, color: Colors.white),
+                            labelStyle: const TextStyle(color: Colors.white),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
+                              borderSide: const BorderSide(color: Colors.white),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white, width: 2),
+                              borderSide: const BorderSide(color: Colors.white, width: 2),
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                           keyboardType: TextInputType.emailAddress,
                           onSaved: (value) => _email = value ?? '',
                           validator: (value) {
@@ -134,10 +157,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           },
                         ),
                         SizedBox(height: 20),
+
+                        // Campo de contraseña
                         TextFormField(
                           decoration: InputDecoration(
                             labelText: 'Contraseña',
-                            prefixIcon: Icon(Icons.lock, color: Colors.white),
+                            prefixIcon: const Icon(Icons.lock, color: Colors.white),
                             suffixIcon: IconButton(
                               icon: Icon(
                                 _isObscure ? Icons.visibility : Icons.visibility_off,
@@ -149,17 +174,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 });
                               },
                             ),
-                            labelStyle: TextStyle(color: Colors.white),
+                            labelStyle: const TextStyle(color: Colors.white),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
+                              borderSide: const BorderSide(color: Colors.white),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white, width: 2),
+                              borderSide: const BorderSide(color: Colors.white, width: 2),
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                           obscureText: _isObscure,
                           onSaved: (value) => _password = value ?? '',
                           validator: (value) {
@@ -173,13 +198,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           },
                         ),
                         SizedBox(height: 30),
+
+                        // Botón de registro
                         ElevatedButton(
-                          onPressed: () async {
-                            if (_formKey.currentState?.validate() == true) {
-                              _formKey.currentState?.save();
-                              await _registerUser(); // Llamada al método de registro
-                            }
-                          },
+                          onPressed: _registerUser, // Llamada al método de registro
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.blue[900], backgroundColor: Colors.white,
                             padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
@@ -187,17 +209,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               borderRadius: BorderRadius.circular(30),
                             ),
                           ),
-                          child: Text(
+                          child: const Text(
                             'Registrarse',
                             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
                         SizedBox(height: 20),
+
+                        // Enlace para ir al login si ya tiene cuenta
                         TextButton(
                           onPressed: () {
                             Navigator.pushNamed(context, '/login');
                           },
-                          child: Text(
+                          child: const Text(
                             '¿Ya tienes una cuenta? Inicia sesión',
                             style: TextStyle(color: Colors.white, fontSize: 16),
                           ),
