@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/widgets/letter_button.dart';
-import 'package:flutter_application/navigation_buttons.dart'; // Importa los botones de navegación
+import 'package:flutter_application/navigation_buttons.dart';
 
 class Abc extends StatelessWidget {
   static const String routeName = '/abc';
