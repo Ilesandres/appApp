@@ -1,30 +1,52 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:flutter_application/main.dart';
+import 'package:flutter_application/login_screen.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(LenguasVivasApp());
+  group('Login Screen Tests', () {
+    testWidgets('Renderiza los widgets principales', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: LoginScreen(),
+        ),
+      );
+      expect(find.byType(TextFormField), findsWidgets);
+      expect(find.text('Iniciar Sesión'), findsOneWidget);
+    });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    testWidgets('Permite ingresar texto en los campos', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: LoginScreen(),
+        ),
+      );
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+      final textFields = find.byType(TextFormField);
+      await tester.enterText(textFields.first, 'test@example.com');
+      await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+      expect(find.text('test@example.com'), findsOneWidget);
+
+      await tester.enterText(textFields.last, 'password123');
+      await tester.pump();
+      expect(find.text('password123'), findsOneWidget);
+    });
+
+    testWidgets('El botón de iniciar sesión responde al toque', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: LoginScreen(),
+        ),
+      );
+
+      final loginButton = find.text('Iniciar Sesión');
+
+
+      expect(loginButton, findsOneWidget);
+
+
+      await tester.tap(loginButton);
+      await tester.pump();
+    });
   });
 }
