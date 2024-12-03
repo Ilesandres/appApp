@@ -43,6 +43,7 @@ class Chat extends StatelessWidget {
         title: Text('Conversaciones en Kamentsa'),
         backgroundColor: Colors.blue[900],
         elevation: 0,
+        automaticallyImplyLeading:false,
       ),
       body: Container(
         decoration: BoxDecoration(

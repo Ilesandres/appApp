@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/services/api_service.dart';
 import 'navigation_buttons.dart';
+import 'package:flutter_application/services/user_service.dart';
 
 class Profile extends StatelessWidget {
   final ApiService _apiService = ApiService();
@@ -69,7 +70,7 @@ class Profile extends StatelessWidget {
               radius: 55,
               backgroundImage: NetworkImage(
                 userData['data']['profileImage'] ??
-                    'https://img.freepik.com/psd-gratis/ilustracion-3d-avatar-o-perfil-humano_23-2150671126.jpg',
+                    'https://pixabay.com/es/vectors/foto-de-perfil-en-blanco-973460/', scale:1.0,
               ),
             ),
           ),
@@ -123,6 +124,7 @@ class Profile extends StatelessWidget {
             icon: Icons.logout,
             title: 'Cerrar sesión',
             onTap: () {
+               UserService().removeUser();
               Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
             },
           ),

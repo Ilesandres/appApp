@@ -45,6 +45,7 @@ class Abc extends StatelessWidget {
         title: const Text('Alfabeto Español'),
         backgroundColor: Colors.blue[900],
         elevation: 0,
+        automaticallyImplyLeading:false,
       ),
       body: Container(
         decoration: BoxDecoration(
