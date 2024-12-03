@@ -15,35 +15,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String _password = '';
   bool _isObscure = true;
 
-  final ApiService _apiService = ApiService(); // Instancia de ApiService
+  final ApiService _apiService = ApiService();
 
   // Método para registrar al usuario
   Future<void> _registerUser() async {
     if (_formKey.currentState?.validate() == true) {
-      // Guardamos los valores del formulario
       _formKey.currentState?.save();
 
       try {
-        // Llamamos al método register de ApiService con los datos del formulario
         bool success = await _apiService.register(_name, _email, _password);
 
         if (success) {
-          // Mostrar mensaje de éxito
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Registro exitoso, redirigiendo a Login')),
           );
-          // Asegúrate de que el mensaje sea visible antes de la redirección
           Future.delayed(Duration(seconds: 2), () {
             Navigator.pushNamed(context, '/login');
           });
         } else {
-          // Mostrar mensaje de error si el registro no fue exitoso
+
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Hubo un error al registrar el usuario')),
           );
         }
       } catch (e) {
-        // Manejar excepciones y mostrar un mensaje de error
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error: $e')),
         );
